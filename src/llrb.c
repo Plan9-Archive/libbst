@@ -68,7 +68,7 @@ llrbinsert(Bsttree *t, Bst *n)
 		return nil;
 	op = nil;
 	t->root = insert(t->cmp, t->root, n, &op);
-	t->root->color = RED;
+	t->root->color = BLACK;
 	return op;
 }
 
@@ -115,7 +115,7 @@ llrbdelete(Bsttree *t, Bst *n)
 	op = nil;
 	t->root = delete(t->cmp, t->root, n, &op);
 	if(t->root != nil)
-		t->root->color = RED;
+		t->root->color = BLACK;
 	return op;
 }
 static Bst *moveredleft(Bst*);

@@ -39,7 +39,8 @@ blackbalance(Bst *h, int b, int *old)
 		if(*old == 0)
 			*old = b;
 		else {
-			if (b != *old) fprint(2, "black balance: %d %d\n", *old, b);
+			if(b != *old)
+				fprint(2, "black balance: %d %d\n", *old, b);
 			assert(b == *old);
 		}
 		return;
