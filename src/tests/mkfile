@@ -1,0 +1,12 @@
+</$objtype/mkfile
+
+BIN=.
+
+TARG=\
+	compare\
+	llrbtest\
+	avltest\
+	oldavlcompare\
+	walktest
+
+</sys/src/cmd/mkmany

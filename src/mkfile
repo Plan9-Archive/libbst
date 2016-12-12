@@ -1,0 +1,14 @@
+</$objtype/mkfile
+
+LIB=/$objtype/lib/libbst.a
+
+OFILES=\
+	bst.$O\
+	avl.$O\
+	llrb.$O\
+	walk.$O
+
+HFILES=\
+	/sys/include/bst.h\
+
+</sys/src/cmd/mksyslib
