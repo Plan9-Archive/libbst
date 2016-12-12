@@ -27,7 +27,7 @@ avllookup(Bsttree *t, Bst *k)
 	return nil;
 }
 
-int insert(int (*)(Bst*, Bst*), Bst**, Bst*, Bst**);
+static int insert(int (*)(Bst*, Bst*), Bst**, Bst*, Bst**);
 
 Bst*
 avlinsert(Bsttree *t, Bst *k)
@@ -39,9 +39,9 @@ avlinsert(Bsttree *t, Bst *k)
 	return old;
 }
 
-int insertfix(int, Bst**);
+static int insertfix(int, Bst**);
 
-int
+static int
 insert(int (*cmp)(Bst*, Bst*), Bst **p, Bst *k, Bst **oldp)
 {
 	Bst *q;
@@ -70,10 +70,10 @@ insert(int (*cmp)(Bst*, Bst*), Bst **p, Bst *k, Bst **oldp)
 	return 0;
 }
 
-Bst *singlerot(int, Bst*);
-Bst *doublerot(int, Bst*);
+static Bst *singlerot(int, Bst*);
+static Bst *doublerot(int, Bst*);
 
-int
+static int
 insertfix(int a, Bst **t)
 {
 	Bst *s;
@@ -96,9 +96,9 @@ insertfix(int a, Bst **t)
 	return 0;
 }
 
-int delete(int (*cmp)(Bst*, Bst*), Bst**, Bst*, Bst**);
-int deletemin(Bst**, Bst**);
-int deletefix(int, Bst**);
+static int delete(int (*cmp)(Bst*, Bst*), Bst**, Bst*, Bst**);
+static int deletemin(Bst**, Bst**);
+static int deletefix(int, Bst**);
 
 Bst*
 avldelete(Bsttree *t, Bst *k)
@@ -112,7 +112,7 @@ avldelete(Bsttree *t, Bst *k)
 	return old;
 }
 
-int
+static int
 delete(int (*cmp)(Bst*, Bst*), Bst **p, Bst *k, Bst **oldp)
 {
 	Bst *q, *e;
@@ -143,7 +143,7 @@ delete(int (*cmp)(Bst*, Bst*), Bst **p, Bst *k, Bst **oldp)
 	return 0;
 }
 
-int
+static int
 deletemin(Bst **p, Bst **oldp)
 {
 	Bst *q;
@@ -161,9 +161,9 @@ deletemin(Bst **p, Bst **oldp)
 	return 0;
 }
 
-Bst *rotate(int, Bst*);
+static Bst *rotate(int, Bst*);
 
-int
+static int
 deletefix(int a, Bst **t)
 {
 	Bst *s;
@@ -192,7 +192,7 @@ deletefix(int a, Bst **t)
 	return 1;
 }
 
-Bst*
+static Bst*
 singlerot(int a, Bst *s)
 {
 	s->balance = 0;
@@ -200,7 +200,7 @@ singlerot(int a, Bst *s)
 	return s;
 }
 
-Bst*
+static Bst*
 doublerot(int a, Bst *s)
 {
 	Bst *r, *p;
@@ -222,7 +222,7 @@ doublerot(int a, Bst *s)
 	return p;
 }
 	
-Bst*
+static Bst*
 rotate(int a, Bst *s)
 {
 	Bst *r;
