@@ -1,4 +1,4 @@
-enum Walks {
+enum {
 	PRE,
 	POST,
 	IN
@@ -6,4 +6,4 @@ enum Walks {
 
 extern int bststacksize;
 
-Channel *bstwalk(Bsttree *tree, Bst *start, Bst *finish, enum Walks type);
+Channel *bstwalk(Bsttree*, Bst*, Bst*, int);

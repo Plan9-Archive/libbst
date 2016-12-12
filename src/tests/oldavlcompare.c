@@ -39,7 +39,7 @@ main(int argc, char **argv)
 	Bsttree *new;
 	Avltree *old;
 	int c, seq;
-	long start[4], stop[4];
+	long start[4], stop[4], newt, oldt;
 
 	seq = 0;
 	ARGBEGIN {
@@ -56,42 +56,58 @@ main(int argc, char **argv)
 	times(start);
 	c = bstinserts(new);
 	times(stop);
-	print("New AVL:\nTime for %d insertions, %d successful: %ld\n", NODES, c, stop[0] - start[0]);
+	newt = stop[0] - start[0];
+	print("New AVL:\nTime for %d insertions, %d successful: %ld\n", NODES, c, newt);
 
 	times(start);
 	c = avlinserts(old);
 	times(stop);
-	print("Old AVL:\nTime for %d insertions, %d successful: %ld\n", NODES, c, stop[0] - start[0]);
+	oldt = stop[0] - start[0];
+	print("Old AVL:\nTime for %d insertions, %d successful: %ld\n", NODES, c, oldt);
+
+	print("Percent faster: %g%%\n\n", ((double)oldt/newt - 1)*100);
 
 	times(start);
 	c = bstlookups(new);
 	times(stop);
-	print("New AVL:\nTime for %d lookups, %d successful: %ld\n", NODES, c, stop[0] - start[0]);
+	newt = stop[0] - start[0];
+	print("New AVL:\nTime for %d lookups, %d successful: %ld\n", NODES, c, newt);
 
 	times(start);
 	c = avllookups(old);
 	times(stop);
-	print("Old AVL:\nTime for %d lookups, %d successful: %ld\n", NODES, c, stop[0] - start[0]);
+	oldt = stop[0] - start[0];
+	print("Old AVL:\nTime for %d lookups, %d successful: %ld\n", NODES, c, oldt);
+
+	print("Percent faster: %g%%\n\n", ((double)oldt/newt - 1)*100);
 
 	times(start);
 	c = bstdeletes(new);
 	times(stop);
-	print("New AVL:\nTime for %d deletions, %d successful: %ld\n", NODES, c, stop[0] - start[0]);
+	newt = stop[0] - start[0];
+	print("New AVL:\nTime for %d deletions, %d successful: %ld\n", NODES, c, newt);
 
 	times(start);
 	c = avldeletes(old);
 	times(stop);
-	print("Old AVL:\nTime for %d deletions, %d successful: %ld\n", NODES, c, stop[0] - start[0]);
+	oldt = stop[0] - start[0];
+	print("Old AVL:\nTime for %d deletions, %d successful: %ld\n", NODES, c, oldt);
+
+	print("Percent faster: %g%%\n\n", ((double)oldt/newt - 1)*100);
 
 	times(start);
 	c = bstlookups(new);
 	times(stop);
-	print("New AVL:\nTime for %d lookups, %d successful: %ld\n", NODES, c, stop[0] - start[0]);
+	newt = stop[0] - start[0];
+	print("New AVL:\nTime for %d lookups, %d successful: %ld\n", NODES, c, newt);
 
 	times(start);
 	c = avllookups(old);
 	times(stop);
-	print("Old AVL:\nTime for %d lookups, %d successful: %ld\n", NODES, c, stop[0] - start[0]);
+	oldt = stop[0] - start[0];
+	print("Old AVL:\nTime for %d lookups, %d successful: %ld\n", NODES, c, oldt);
+
+	print("Percent faster: %g%%\n\n", ((double)oldt/newt - 1)*100);
 }
 
 int rands[NODES];
