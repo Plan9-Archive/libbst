@@ -9,11 +9,3 @@ struct Bsttree
 	Bstop delete;
 	Bstop insert;
 };
-
-Bst *avllookup(Bsttree*, Bst*);
-Bst *avldelete(Bsttree*, Bst*);
-Bst *avlinsert(Bsttree*, Bst*);
-
-Bst *llrblookup(Bsttree*, Bst*);
-Bst *llrbdelete(Bsttree*, Bst*);
-Bst *llrbinsert(Bsttree*, Bst*);

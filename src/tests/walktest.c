@@ -38,17 +38,18 @@ threadmain(int argc, char **argv)
 	Bsttree *t;
 	Intnode *a, *sp, *ep, s, e;
 	Channel *c;
-	int type;
 
-	type = AVL;
+	t = nil;
 	ARGBEGIN {
 	case 'a':
-		type = AVL;
+		t = bstcreateavl(intcmp);
 		break;
 	case 'l':
-		type = LLRB;
+		t = bstcreatellrb(intcmp);
 		break;
 	} ARGEND
+	if(t == nil)
+		t = bstcreateavl(intcmp);
 
 	sp = nil;
 	ep = nil;
@@ -58,8 +59,8 @@ threadmain(int argc, char **argv)
 		e.v = strtol(argv[1], nil, 10);
 		ep = &e;
 	}
+
 	srand(time(nil));
-	t = bstcreate(type, intcmp);
 
 	for(a = pool; a < pool+nelem(pool); a++) {
 		a->v = nrand(MAX);

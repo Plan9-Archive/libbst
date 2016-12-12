@@ -50,7 +50,7 @@ main(int argc, char **argv)
 
 	setup(seq);
 
-	new = bstcreate(AVL, bstnodecmp);
+	new = bstcreateavl(bstnodecmp);
 	old = mkavltree(avlnodecmp);
 
 	times(start);

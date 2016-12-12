@@ -66,7 +66,7 @@ main(void)
 	int i, r;
 
 	srand(time(nil));
-	t = bstcreate(AVL, intcmp);
+	t = bstcreateavl(intcmp);
 
 	for(a = pool; a < pool+nelem(pool); a++) {
 		a->v = nrand(MAX);

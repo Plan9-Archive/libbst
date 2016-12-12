@@ -1,6 +1,7 @@
 .TH BST 2
 .SH NAME
-bstcreate,
+bstcreateavl,
+bstcreatellrb,
 bstinsert,
 bstdelete,
 bstlookup,
@@ -20,7 +21,8 @@ enum Type {
 	LLRB
 };
 
-Bsttree *bstcreate(enum Type type, int(*cmp)(Bst*, Bst*));
+Bsttree *bstcreateavl(int(*cmp)(Bst*, Bst*));
+Bsttree *bstcreatellrb(int(*cmp)(Bst*, Bst*));
 Bst     *bstroot(Bsttree *tree);
 Bst     *bstinsert(Bsttree *tree, Bst *new);
 Bst     *bstdelete(Bsttree *tree, Bst *key);
@@ -44,22 +46,29 @@ Channel  *bstwalk(Bsttree *tree, Bst *lower, Bst *upper,
 These routines allow creation and maintenance of in-memory balanced
 binary search tree.
 .PP
-An empty tree is created by calling
-.I bstcreate
-with the type of tree and a comparison function as argument.
-The implementations available are AVL and left leaning red black
-trees (LLRB).
-The comparison function should take two pointers to
+An empty tree is created by calling either
+.I bstcreateavl
+which returns an AVL balanced tree
+or
+.I bstcreatellrb
+which returns a
+left leaning red black tree. The creation functions
+take a comparison function as an argument.
+The comparison function must take two pointers to
 .B Bst
 structures and return an integer less than, equal to, or
 greater than 0 as the first is
 respectively less than,
 equal to, or greater than the second.
 .PP
+.I Bstroot
+returns the root
+.B Bst
+node of the tree.
 .I Bstinsert
 adds a new
-tree node into the tree and returns an existing
-tree node with the same key that has been removed
+node into the tree and returns an existing
+node with the same key that has been removed
 from the tree and may be freed.
 .I Bstlookup
 returns the
@@ -68,10 +77,8 @@ node that matches the key or
 if no node matches.
 .I Bstdelete
 removes the node matching the key from the tree and returns
-it.
+it. It returns nil of no matching key is found.
 .PP
-.I Bstroot
-returns the root Bst node of the tree.
 .PP
 .I Bstwalk
 returns a pointer to a newly-allocated channel (see
@@ -153,4 +160,4 @@ Robert Sedgewick, ``Left-leaning Red-Black Trees'',
 Donald Knuth, ``The Art of Computer Programming'', Volume 3. Section 6.2.3
 .SH DIAGNOSTICS
 .I Bstcreate
-returns nil on error and sets the error string if necessary.
+returns nil on error.

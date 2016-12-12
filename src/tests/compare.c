@@ -38,8 +38,8 @@ main(int argc, char **argv)
 
 	setup(seq);
 
-	avl = bstcreate(AVL, nodecmp);
-	llrb = bstcreate(LLRB, nodecmp);
+	avl = bstcreateavl(nodecmp);
+	llrb = bstcreateavl(nodecmp);
 
 	times(start);
 	c = llrbinserts(llrb);

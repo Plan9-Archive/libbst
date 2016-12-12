@@ -5,6 +5,27 @@
 
 /* See Sedgewick 'Left-leaning Red-Black Trees' */
 
+static Bst *llrblookup(Bsttree*, Bst*);
+static Bst *llrbdelete(Bsttree*, Bst*);
+static Bst *llrbinsert(Bsttree*, Bst*);
+
+Bsttree*
+bstcreatellrb(int (*cmp)(Bst*, Bst*))
+{
+	Bsttree *t;
+
+	t = malloc(sizeof(*t));
+	if(t == nil)
+		return nil;
+
+	t->cmp = cmp;
+	t->root = nil;
+	t->lookup = llrblookup;
+	t->delete = llrbdelete;
+	t->insert = llrbinsert;
+	return t;
+}
+
 enum {
 	RED,
 	BLACK
@@ -12,7 +33,7 @@ enum {
 
 #define isred(h) ((h) == nil ? 0 : (h)->color == RED)
 
-Bst*
+static Bst*
 llrblookup(Bsttree *t, Bst *k)
 {
 	Bst *h;
@@ -38,7 +59,7 @@ llrblookup(Bsttree *t, Bst *k)
 
 static Bst *insert(int(*)(Bst*, Bst*), Bst*, Bst*, Bst**);
 
-Bst*
+static Bst*
 llrbinsert(Bsttree *t, Bst *n)
 {
 	Bst *op;
@@ -86,7 +107,7 @@ insert(int (*cmp)(Bst*, Bst*), Bst *h, Bst *n, Bst **op)
 
 static Bst *delete(int(*)(Bst*, Bst*), Bst*, Bst*, Bst**);
 
-Bst*
+static Bst*
 llrbdelete(Bsttree *t, Bst *n)
 {
 	Bst *op;

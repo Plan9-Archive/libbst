@@ -5,7 +5,28 @@
 
 /* See Knuth Volume 3, 6.2.3 */
 
-Bst*
+static Bst *avllookup(Bsttree*, Bst*);
+static Bst *avldelete(Bsttree*, Bst*);
+static Bst *avlinsert(Bsttree*, Bst*);
+
+Bsttree*
+bstcreateavl(int (*cmp)(Bst*, Bst*))
+{
+	Bsttree *t;
+
+	t = malloc(sizeof(*t));
+	if(t == nil)
+		return nil;
+
+	t->cmp = cmp;
+	t->root = nil;
+	t->lookup = avllookup;
+	t->delete = avldelete;
+	t->insert = avlinsert;
+	return t;
+}
+
+static Bst*
 avllookup(Bsttree *t, Bst *k)
 {
 	Bst *h;
@@ -29,7 +50,7 @@ avllookup(Bsttree *t, Bst *k)
 
 static int insert(int (*)(Bst*, Bst*), Bst**, Bst*, Bst**);
 
-Bst*
+static Bst*
 avlinsert(Bsttree *t, Bst *k)
 {
 	Bst *old;
@@ -100,7 +121,7 @@ static int delete(int (*cmp)(Bst*, Bst*), Bst**, Bst*, Bst**);
 static int deletemin(Bst**, Bst**);
 static int deletefix(int, Bst**);
 
-Bst*
+static Bst*
 avldelete(Bsttree *t, Bst *k)
 {
 	Bst *old;

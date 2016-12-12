@@ -195,7 +195,7 @@ main(int argc, char *argv[])
 		ignoreerrors = 1;
 		break;
 	case 'm':
-		scoretree = bstcreate(AVL, scoretreecmp);
+		scoretree = bstcreateavl(scoretreecmp);
 		break;
 	case 'r':
 		if(ignoreerrors)

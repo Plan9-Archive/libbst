@@ -14,12 +14,8 @@ struct Bst {
 	};
 };
 
-enum {
-	AVL,
-	LLRB
-};
-
-Bsttree *bstcreate(int, int(*cmp)(Bst*, Bst*));
+Bsttree *bstcreateavl(int(*cmp)(Bst*, Bst*));
+Bsttree *bstcreatellrb(int(*cmp)(Bst*, Bst*));
 Bst *bstroot(Bsttree*);
 Bst *bstlookup(Bsttree*, Bst*);
 Bst *bstdelete(Bsttree*, Bst*);
