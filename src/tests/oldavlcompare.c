@@ -3,6 +3,13 @@
 #include <bst.h>
 #include <avl.h>
 
+struct Avltree
+{
+	Avl	*root;
+	int	(*cmp)(Avl*, Avl*);
+	Avlwalk	*walks;
+};
+
 enum {
 	NODES =    500000,
 	MAX =    10000000
@@ -32,6 +39,8 @@ int avlinserts(Avltree*);
 int avlnodecmp(Avl*, Avl*);
 int avldeletes(Avltree*);
 int avllookups(Avltree*);
+
+void sanity(Avlnode*, Bstnode*);
 
 void
 main(int argc, char **argv)
@@ -65,7 +74,9 @@ main(int argc, char **argv)
 	oldt = stop[0] - start[0];
 	print("Old AVL:\nTime for %d insertions, %d successful: %ld\n", NODES, c, oldt);
 
-	print("Percent faster: %g%%\n\n", ((double)oldt/newt - 1)*100);
+	print("Percent faster: %g%%\n", ((double)oldt/newt - 1)*100);
+	sanity((Avlnode*)old->root, (Bstnode*)bstroot(new));
+	print("Sanity test passed.\n\n");
 
 	times(start);
 	c = bstlookups(new);
@@ -93,7 +104,9 @@ main(int argc, char **argv)
 	oldt = stop[0] - start[0];
 	print("Old AVL:\nTime for %d deletions, %d successful: %ld\n", NODES, c, oldt);
 
-	print("Percent faster: %g%%\n\n", ((double)oldt/newt - 1)*100);
+	print("Percent faster: %g%%\n", ((double)oldt/newt - 1)*100);
+	sanity((Avlnode*)old->root, (Bstnode*)bstroot(new));
+	print("Sanity test passed.\n\n");
 
 	times(start);
 	c = bstlookups(new);
@@ -107,7 +120,10 @@ main(int argc, char **argv)
 	oldt = stop[0] - start[0];
 	print("Old AVL:\nTime for %d lookups, %d successful: %ld\n", NODES, c, oldt);
 
-	print("Percent faster: %g%%\n\n", ((double)oldt/newt - 1)*100);
+	if(newt != 0)
+		print("Percent faster: %g%%\n", ((double)oldt/newt - 1)*100);
+	sanity((Avlnode*)old->root, (Bstnode*)bstroot(new));
+	print("Sanity test passed.\n");
 }
 
 int rands[NODES];
@@ -130,6 +146,19 @@ setup(int s)
 		}
 		bstpool[i].v = avlpool[i].v;
 	}
+}
+
+void
+sanity(Avlnode *a, Bstnode *b)
+{
+	if(a == nil) {
+		assert(b == nil);
+		return;
+	}
+
+	assert(a->v == b->v);
+	sanity((Avlnode*)a->n[0], (Bstnode*)b->c[0]);
+	sanity((Avlnode*)a->n[1], (Bstnode*)b->c[1]);
 }
 
 int
